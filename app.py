@@ -9,7 +9,13 @@ from resources.store import Store, StoreList
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///mydatabase.db')
+
+uri = os.getenv("DATABASE_URL")  
+# or other relevant config var 
+if uri.startswith("postgres://"):     
+    uri = uri.replace("postgres://", "postgresql://", 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = uri, 'sqlite:///mydatabase.db'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
 
 app.config['DEBUG'] = True
