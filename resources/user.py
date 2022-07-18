@@ -26,3 +26,7 @@ class UserRegister(Resource):
         user.save_to_db()
 
         return { "message" : "User created successfully."}, 201
+
+class Home(Resource):
+    def get(self):
+        return { "message" : "Your app is working" }
